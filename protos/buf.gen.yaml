@@ -12,5 +12,5 @@ plugins:
     out: ../gen
     strategy: all
   - plugin: gorm
-    opt: paths=source_relative
+    opt: engine=clickhouse,paths=source_relative
     out: ../gen/protos
