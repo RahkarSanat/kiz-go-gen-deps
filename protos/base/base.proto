@@ -6,7 +6,7 @@ import "google/api/field_behavior.proto";
 import "tagger/tagger.proto";
 import "gorm/gorm.proto";
 
-option go_package = "github.com/rahkar-sanat/kiz-go-gen-deps/gen/base";
+option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/base";
 
 package base;
 
