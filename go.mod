@@ -1,4 +1,4 @@
-module github.com/rahkar-sanat/kiz-go-gen-deps
+module github.com/RahkarSanat/kiz-go-gen-deps
 
 go 1.21.1
 
