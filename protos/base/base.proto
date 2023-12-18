@@ -1,0 +1,216 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/field_behavior.proto";
+import "tagger/tagger.proto";
+import "gorm/gorm.proto";
+
+option go_package = "github.com/rahkar-sanat/kiz-go-gen-deps/gen/base";
+
+package base;
+
+extend google.protobuf.FileOptions {
+	CustomFileOptions fileOps = 10001;
+}
+
+message CustomFileOptions {
+	bool ignore = 1;
+	string db_name = 2;
+}
+
+message MongoOption {
+	string mongoType = 1;
+}
+
+message AggregateOption {
+	bool is_aggregate = 1;
+	string aggregate = 2;
+}
+
+extend google.protobuf.FieldOptions {
+	MongoOption mongoType = 10001;
+}
+
+extend google.protobuf.MethodOptions {
+	AclOption acl = 10001;
+	AggregateOption agropt = 10002;
+}
+
+message AclOption {
+	string Sub = 1;
+	string Obj = 2;
+	string Act = 3;
+}
+
+message Sort {
+	optional string key = 1;
+	optional int32 value = 2;
+}
+
+message Pagination {
+	optional int32 limit = 1;
+	optional int64 skip = 2;
+	repeated Sort sort = 3;
+}
+
+message Filter {
+    optional Pagination pagination = 1;
+    optional string projection = 2;
+    optional string query = 3;
+    optional bool exclude_own = 4;
+    optional bool exclude_zone = 5;
+    optional bool exclude_share = 6;
+    optional bool exclude_relatoin = 7;
+    optional bool is_trash = 8;
+}
+
+message Operations {
+    optional string addToSet = 1;
+    optional string bit = 2;
+    optional string currentDate = 3;
+    optional string inc = 4;
+    optional string max = 5;
+    optional string min = 6;
+    optional string mul = 7;
+    optional string pop = 8;
+    optional string pull = 9;
+    optional string pullAll = 10;
+    optional string push = 11;
+    optional string rename = 12;
+    optional string set = 13;
+    optional string setOnInsert = 14;
+    optional string unset = 15;
+}
+
+message Total {
+    optional int64 count = 1;
+}
+
+message BaseAccess {
+	option (gorm.opts) = {
+	    ormable:true,
+    	};
+	string id = 10 [(gorm.field).tag = {type: "UUID" primary_key: true}];
+	string owner = 1 [(google.api.field_behavior) = REQUIRED];
+	repeated string zones = 2 [(tagger.tags) = "gorm:\"type:Array(String)\""];
+	repeated string clients = 3 [
+		(google.api.field_behavior) = REQUIRED,
+ 		(tagger.tags) = "gorm:\"type:Array(String)\""
+	];
+	repeated string shares = 4 [(tagger.tags) = "gorm:\"type:Array(String)\""];
+  	repeated string relations = 5 [(tagger.tags) = "gorm:\"type:Array(String)\""];
+	optional string created_by = 6 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+	optional string updated_by = 7 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+	optional string deleted_by = 8 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+	optional string restored_by = 9 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+}
+
+message BaseProperties {
+	option (gorm.opts) = {
+	    ormable:true,
+    	};
+	string id = 10 [(gorm.field).tag = {type: "UUID" primary_key: true}];
+  	optional string created_in = 1 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+  	optional string updated_in = 2 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+  	optional string deleted_in = 3 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+  	optional string restored_in = 4 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+	repeated string tags = 5;
+	optional string version = 6;
+}
+
+message BaseDates {
+	option (gorm.opts) = {
+	    ormable:true,
+    	};
+	string id = 10 [(gorm.field).tag = {type: "UUID" primary_key: true}];
+	optional string created_at = 1 [
+		(base.mongoType).mongoType = "Datetime",
+		(gorm.field).tag = {type: "DateTime"}
+	];
+	optional string updated_at = 2 [
+		(base.mongoType).mongoType = "Datetime",
+		(gorm.field).tag = {type: "DateTime"}
+	];
+	optional string deleted_at = 3 [
+		(base.mongoType).mongoType = "Datetime",
+		(gorm.field).tag = {type: "DateTime"}
+	];
+	optional string restored_at = 4 [
+		(base.mongoType).mongoType = "Datetime",
+		(gorm.field).tag = {type: "DateTime"}
+	];
+}
+
+message BaseAccessUpdate {
+	optional string owner = 1;
+	repeated string zones = 2;
+	repeated string clients = 3;
+	repeated string shares = 4;
+  	repeated string relations = 5;
+	optional string created_by = 6 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+	optional string updated_by = 7 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+	optional string deleted_by = 8 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+	optional string restored_at = 9 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+}
+
+message BasePropertiesUpdate {
+  	optional string created_in = 1 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+  	optional string updated_in = 2 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+  	optional string deleted_in = 3 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+  	optional string restored_in = 4 [
+		(base.mongoType).mongoType = "ObjectID"
+	];
+	repeated string tags = 5;
+	optional string version = 6;
+}
+
+message BaseDatesUpdate {
+	optional string created_at = 1 [
+		(base.mongoType).mongoType = "Datetime",
+		(gorm.field).tag = {type: "DateTime"}
+	];
+	optional string updated_at = 2 [
+		(base.mongoType).mongoType = "Datetime",
+		(gorm.field).tag = {type: "DateTime"}
+	];
+	optional string deleted_at = 3 [
+		(base.mongoType).mongoType = "Datetime",
+		(gorm.field).tag = {type: "DateTime"}
+	];
+	optional string restored_at = 4 [
+		(base.mongoType).mongoType = "Datetime",
+		(gorm.field).tag = {type: "DateTime"}
+	];
+}
+

@@ -1,0 +1,11 @@
+version: v1                                                                     
+# <snip>                                                                        
+deps:                                                                           
+  - buf.build/bufbuild/protovalidate                                            
+  - buf.build/googleapis/googleapis                                             
+# <snip>                                                                        
+breaking:                                                                       
+  use:                                                                          
+    - FILE                                                                      
+lint:                                                                           
+  use:
