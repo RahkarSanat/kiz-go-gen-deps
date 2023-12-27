@@ -1,11 +1,12 @@
 syntax = "proto3";
 
 package auth_authorization;
+
 option go_package = "./authorization";
 
 service AuthorizationService {
   rpc Can(AuthorizeRequest) returns (AuthorizeResponse);
-  rpc Grants(AccessRequest) returns (GrantsList) {};
+  rpc Grants(AccessRequest) returns (GrantsList) {}
   rpc Sanitize(SanitizeRequest) returns (SanitizeResponse);
 
   rpc MqttTopicAuthorization(MqttAuthorization) returns (TopicIsAvailable);
@@ -73,7 +74,9 @@ message SanitizeResponse {
   Request request = 2;
 }
 
-message GrantsList { repeated Grant items = 1; }
+message GrantsList {
+  repeated Grant items = 1;
+}
 
 message MqttAuthorization {
   string topic = 1;
@@ -81,5 +84,6 @@ message MqttAuthorization {
   string mqtt_username = 3;
 }
 
-message TopicIsAvailable { string available = 1; }
-
+message TopicIsAvailable {
+  string available = 1;
+}
