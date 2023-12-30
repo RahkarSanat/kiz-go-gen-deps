@@ -8,10 +8,23 @@ import "google/protobuf/descriptor.proto";
 import "gorm/gorm.proto";
 import "tagger/tagger.proto";
 
-option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/base";
+option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/base";
 
 extend google.protobuf.FileOptions {
   CustomFileOptions fileOps = 10001;
+}
+
+message CountRequest {
+  optional Filter filter = 1;
+}
+
+message FindRequest {
+  optional Filter filter = 1;
+}
+
+message FindByIDRequest {
+  string id = 1 [(google.api.field_behavior) = REQUIRED];
+  optional Filter filter = 2;
 }
 
 message CustomFileOptions {
