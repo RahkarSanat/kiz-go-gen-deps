@@ -6,6 +6,25 @@ import (
 
 var _ fmt.Stringer
 
+func (m *CountRequest) Validate() error {
+
+	return nil
+}
+
+func (m *FindRequest) Validate() error {
+
+	return nil
+}
+
+func (m *FindByIDRequest) Validate() error {
+
+	if m.Id == "" {
+		return fmt.Errorf("Id is required")
+	}
+
+	return nil
+}
+
 func (m *CustomFileOptions) Validate() error {
 
 	return nil
