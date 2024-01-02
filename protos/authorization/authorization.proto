@@ -6,8 +6,9 @@ option go_package = "./authorization";
 
 service AuthorizationService {
   rpc Can(AuthorizeRequest) returns (AuthorizeResponse);
-  rpc Grants(AccessRequest) returns (GrantsList) {}
+  rpc Grants(AccessRequest) returns (GrantsList) {};
   rpc Sanitize(SanitizeRequest) returns (SanitizeResponse);
+  rpc SanitizeDecrypted(SanitizeDecryptedRequest) returns (SanitizeResponse);
 
   rpc MqttTopicAuthorization(MqttAuthorization) returns (TopicIsAvailable);
 }
@@ -19,10 +20,11 @@ message AuthorizeRequest {
 }
 
 message AccessRequest {
-  string access_token = 1;
+  optional string access_token = 1;
   optional string action = 2;
   optional string object = 3;
   repeated string resources = 4;
+  optional string api_key = 5;
 }
 
 message Token {
@@ -62,15 +64,28 @@ message Request {
 }
 
 message SanitizeRequest {
-  string access_token = 1;
+  optional string access_token = 1;
   string action = 2;
   string object = 3;
   repeated string scope = 4;
   Request request = 5;
-  optional bool exclude_own = 6;
-  optional bool exclude_zone = 7;
-  optional bool exclude_share = 8;
-  optional bool exclude_relatoin = 9;
+  bool is_influx = 6;
+  string db = 7;
+  optional string api_key = 8;
+  optional bool exclude_own = 9;
+  optional bool exclude_zone = 10;
+  optional bool exclude_share = 11;
+  optional bool exclude_relatoin = 12;
+}
+
+message SanitizeDecryptedRequest {
+  Token token = 1;
+  string action = 2;
+  string object = 3;
+  repeated string scope = 4;
+  Request request = 5;
+  bool is_influx = 6;
+  string db = 7;
 }
 
 message SanitizeResponse {
@@ -78,9 +93,7 @@ message SanitizeResponse {
   Request request = 2;
 }
 
-message GrantsList {
-  repeated Grant items = 1;
-}
+message GrantsList { repeated Grant items = 1; }
 
 message MqttAuthorization {
   string topic = 1;
@@ -88,6 +101,4 @@ message MqttAuthorization {
   string mqtt_username = 3;
 }
 
-message TopicIsAvailable {
-  string available = 1;
-}
+message TopicIsAvailable { string available = 1; }

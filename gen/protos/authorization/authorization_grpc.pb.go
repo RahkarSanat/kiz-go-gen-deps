@@ -25,6 +25,7 @@ type AuthorizationServiceClient interface {
 	Can(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
 	Grants(ctx context.Context, in *AccessRequest, opts ...grpc.CallOption) (*GrantsList, error)
 	Sanitize(ctx context.Context, in *SanitizeRequest, opts ...grpc.CallOption) (*SanitizeResponse, error)
+	SanitizeDecrypted(ctx context.Context, in *SanitizeDecryptedRequest, opts ...grpc.CallOption) (*SanitizeResponse, error)
 	MqttTopicAuthorization(ctx context.Context, in *MqttAuthorization, opts ...grpc.CallOption) (*TopicIsAvailable, error)
 }
 
@@ -63,6 +64,15 @@ func (c *authorizationServiceClient) Sanitize(ctx context.Context, in *SanitizeR
 	return out, nil
 }
 
+func (c *authorizationServiceClient) SanitizeDecrypted(ctx context.Context, in *SanitizeDecryptedRequest, opts ...grpc.CallOption) (*SanitizeResponse, error) {
+	out := new(SanitizeResponse)
+	err := c.cc.Invoke(ctx, "/auth_authorization.AuthorizationService/SanitizeDecrypted", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authorizationServiceClient) MqttTopicAuthorization(ctx context.Context, in *MqttAuthorization, opts ...grpc.CallOption) (*TopicIsAvailable, error) {
 	out := new(TopicIsAvailable)
 	err := c.cc.Invoke(ctx, "/auth_authorization.AuthorizationService/MqttTopicAuthorization", in, out, opts...)
@@ -79,6 +89,7 @@ type AuthorizationServiceServer interface {
 	Can(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
 	Grants(context.Context, *AccessRequest) (*GrantsList, error)
 	Sanitize(context.Context, *SanitizeRequest) (*SanitizeResponse, error)
+	SanitizeDecrypted(context.Context, *SanitizeDecryptedRequest) (*SanitizeResponse, error)
 	MqttTopicAuthorization(context.Context, *MqttAuthorization) (*TopicIsAvailable, error)
 	mustEmbedUnimplementedAuthorizationServiceServer()
 }
@@ -95,6 +106,9 @@ func (UnimplementedAuthorizationServiceServer) Grants(context.Context, *AccessRe
 }
 func (UnimplementedAuthorizationServiceServer) Sanitize(context.Context, *SanitizeRequest) (*SanitizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Sanitize not implemented")
+}
+func (UnimplementedAuthorizationServiceServer) SanitizeDecrypted(context.Context, *SanitizeDecryptedRequest) (*SanitizeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SanitizeDecrypted not implemented")
 }
 func (UnimplementedAuthorizationServiceServer) MqttTopicAuthorization(context.Context, *MqttAuthorization) (*TopicIsAvailable, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MqttTopicAuthorization not implemented")
@@ -166,6 +180,24 @@ func _AuthorizationService_Sanitize_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthorizationService_SanitizeDecrypted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SanitizeDecryptedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizationServiceServer).SanitizeDecrypted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/auth_authorization.AuthorizationService/SanitizeDecrypted",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizationServiceServer).SanitizeDecrypted(ctx, req.(*SanitizeDecryptedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthorizationService_MqttTopicAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MqttAuthorization)
 	if err := dec(in); err != nil {
@@ -202,6 +234,10 @@ var AuthorizationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Sanitize",
 			Handler:    _AuthorizationService_Sanitize_Handler,
+		},
+		{
+			MethodName: "SanitizeDecrypted",
+			Handler:    _AuthorizationService_SanitizeDecrypted_Handler,
 		},
 		{
 			MethodName: "MqttTopicAuthorization",
