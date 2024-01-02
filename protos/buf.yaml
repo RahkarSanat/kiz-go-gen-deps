@@ -1,8 +1,9 @@
+---
 version: v1
 name: buf.build/alipourhabibi/base
-deps:                                                                           
-  - buf.build/bufbuild/protovalidate                                            
-  - buf.build/googleapis/googleapis                                             
+deps:
+  - buf.build/bufbuild/protovalidate
+  - buf.build/googleapis/googleapis
 breaking:
   use:
     - FILE

@@ -40,6 +40,11 @@ func (m *AggregateOption) Validate() error {
 	return nil
 }
 
+func (m *ViewOption) Validate() error {
+
+	return nil
+}
+
 func (m *AclOption) Validate() error {
 
 	return nil

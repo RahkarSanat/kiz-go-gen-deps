@@ -6,7 +6,6 @@ import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/protobuf/descriptor.proto";
 import "gorm/gorm.proto";
-import "tagger/tagger.proto";
 
 option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/base";
 
@@ -41,6 +40,11 @@ message AggregateOption {
   string aggregate = 2;
 }
 
+message ViewOption {
+  bool is_view = 1;
+  string name = 2;
+}
+
 extend google.protobuf.FieldOptions {
   MongoOption mongoType = 10001;
 }
@@ -48,6 +52,7 @@ extend google.protobuf.FieldOptions {
 extend google.protobuf.MethodOptions {
   AclOption acl = 10001;
   AggregateOption agropt = 10002;
+  ViewOption view = 10003;
 }
 
 message AclOption {
@@ -117,13 +122,12 @@ message BaseAccess {
     primary_key: true
   }];
   string owner = 1 [(google.api.field_behavior) = REQUIRED];
-  repeated string zones = 2 [(tagger.tags) = "gorm:\"type:Array(String)\""];
+  repeated string zones = 2;
   repeated string clients = 3 [
-    (google.api.field_behavior) = REQUIRED,
-    (tagger.tags) = "gorm:\"type:Array(String)\""
+    (google.api.field_behavior) = REQUIRED
   ];
-  repeated string shares = 4 [(tagger.tags) = "gorm:\"type:Array(String)\""];
-  repeated string relations = 5 [(tagger.tags) = "gorm:\"type:Array(String)\""];
+  repeated string shares = 4;
+  repeated string relations = 5;
   optional string created_by = 6 [(base.mongoType).mongoType = "ObjectID"];
   optional string updated_by = 7 [(base.mongoType).mongoType = "ObjectID"];
   optional string deleted_by = 8 [(base.mongoType).mongoType = "ObjectID"];

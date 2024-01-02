@@ -67,6 +67,10 @@ message SanitizeRequest {
   string object = 3;
   repeated string scope = 4;
   Request request = 5;
+  optional bool exclude_own = 6;
+  optional bool exclude_zone = 7;
+  optional bool exclude_share = 8;
+  optional bool exclude_relatoin = 9;
 }
 
 message SanitizeResponse {
