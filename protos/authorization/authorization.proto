@@ -86,6 +86,11 @@ message SanitizeDecryptedRequest {
   Request request = 5;
   bool is_influx = 6;
   string db = 7;
+  optional string api_key = 8;
+  optional bool exclude_own = 9;
+  optional bool exclude_zone = 10;
+  optional bool exclude_share = 11;
+  optional bool exclude_relatoin = 12;
 }
 
 message SanitizeResponse {
