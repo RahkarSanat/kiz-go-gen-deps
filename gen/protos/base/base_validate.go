@@ -114,3 +114,18 @@ func (m *BaseDatesUpdate) Validate() error {
 
 	return nil
 }
+
+func (m *BaseAccessRead) Validate() error {
+
+	return nil
+}
+
+func (m *BasePropertiesRead) Validate() error {
+
+	return nil
+}
+
+func (m *BaseDatesRead) Validate() error {
+
+	return nil
+}
