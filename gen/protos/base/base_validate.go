@@ -35,6 +35,11 @@ func (m *MongoOption) Validate() error {
 	return nil
 }
 
+func (m *MongoMessageOption) Validate() error {
+
+	return nil
+}
+
 func (m *AggregateOption) Validate() error {
 
 	return nil
