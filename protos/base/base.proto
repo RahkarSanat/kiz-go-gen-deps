@@ -55,7 +55,7 @@ extend google.protobuf.FieldOptions {
 }
 
 extend google.protobuf.MessageOptions {
-  MongoMessageOption validate = 10004;
+  MongoMessageOption mongoValidate = 10004;
 }
 
 extend google.protobuf.MethodOptions {
