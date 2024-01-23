@@ -33,7 +33,6 @@ message CustomFileOptions {
 
 message MongoOption {
   string mongoType = 1;
-  bool validate = 2;
 }
 
 message AggregateOption {
@@ -55,7 +54,7 @@ extend google.protobuf.MessageOptions {
 }
 
 message MongoMessageOptions {
-  bool validate = 1;
+  bool should_validate = 1;
 }
 
 extend google.protobuf.MethodOptions {
