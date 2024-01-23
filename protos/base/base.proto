@@ -36,10 +36,6 @@ message MongoOption {
   bool validate = 2;
 }
 
-message MongoMessageOption {
-  bool validate = 1;
-}
-
 message AggregateOption {
   bool is_aggregate = 1;
   string aggregate = 2;
@@ -55,7 +51,11 @@ extend google.protobuf.FieldOptions {
 }
 
 extend google.protobuf.MessageOptions {
-  MongoMessageOption mongoValidate = 10004;
+    MongoMessageOptions mongoOpts = 52120;
+}
+
+message MongoMessageOptions {
+  bool validate = 1;
 }
 
 extend google.protobuf.MethodOptions {
