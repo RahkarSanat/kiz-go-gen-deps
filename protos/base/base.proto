@@ -33,6 +33,7 @@ message CustomFileOptions {
 
 message MongoOption {
   string mongoType = 1;
+  bool validate = 2;
 }
 
 message AggregateOption {
