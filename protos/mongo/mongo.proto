@@ -5,7 +5,7 @@
 syntax = "proto3";
 package mongo;
 import "google/protobuf/descriptor.proto";
-option go_package = "github.com/RahkarSanat/protoc-gen-mongovalidate";
+option go_package = "./mongo";
 
 
 // Custom FieldOptions
