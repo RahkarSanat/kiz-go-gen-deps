@@ -42,8 +42,9 @@ message FileOptions {
 // Custom MessageOptions
 message MessageOptions {
 
-  // Messages tagged with this will not be processed
-  bool ignore = 1;
+  // Messages tagged with this will be processed
+  // We don't use ignore as only we would want small amount of messages to be processed
+  bool not_ignore = 1;
 
   // Messages tagged with this will have all fields marked as "required":
   bool all_fields_required = 2;
