@@ -3,9 +3,9 @@
 // See https://github.com/protocolbuffers/protobuf/blob/master/docs/options.md
 
 syntax = "proto3";
-package protoc.gen.jsonschema;
+package mongo;
 import "google/protobuf/descriptor.proto";
-option go_package = "github.com/chrusty/protoc-gen-jsonschema";
+option go_package = "github.com/RahkarSanat/protoc-gen-mongovalidate";
 
 
 // Custom FieldOptions
