@@ -22,6 +22,7 @@ message Void {
 
 message AccessToken {
   string access_token = 1;
+  string api_key = 2;
 }
 
 message AuthRequest {
