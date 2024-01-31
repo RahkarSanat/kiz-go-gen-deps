@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-import "gorm/gorm.proto";
-
 package storage;
+
+import "gorm/gorm.proto";
 
 option go_package = "./storage";
 
@@ -12,14 +12,14 @@ message ReadObjectRequest {
 }
 
 message WriteObjectRequest {
-	FirstMessage first_message = 1;
-	ChecksummedData data = 2;
-  	bool finish_write = 3;
+  FirstMessage first_message = 1;
+  ChecksummedData data = 2;
+  bool finish_write = 3;
 }
 
 message FirstMessage {
-	string bucket = 1;
-	string name = 2;
+  string bucket = 1;
+  string name = 2;
 }
 
 // Response message for ReadObject.
@@ -38,8 +38,6 @@ message WriteObjectResponse {
     int64 persisted_size = 1;
   }
 }
-
-
 
 message ChecksummedData {
   // The data.

@@ -50,17 +50,22 @@ extend google.protobuf.FieldOptions {
 }
 
 extend google.protobuf.MessageOptions {
-    MongoMessageOptions mongoOpts = 52120;
+  MongoMessageOptions mongoOpts = 52120;
 }
 
 message MongoMessageOptions {
   bool should_validate = 1;
 }
 
+message MinioOption {
+  bool ignore = 1;
+}
+
 extend google.protobuf.MethodOptions {
   AclOption acl = 10001;
   AggregateOption agropt = 10002;
   ViewOption view = 10003;
+  MinioOption minio = 10004;
 }
 
 message AclOption {
@@ -131,9 +136,7 @@ message BaseAccess {
   }];
   string owner = 1 [(google.api.field_behavior) = REQUIRED];
   repeated string zones = 2;
-  repeated string clients = 3 [
-    (google.api.field_behavior) = REQUIRED
-  ];
+  repeated string clients = 3 [(google.api.field_behavior) = REQUIRED];
   repeated string shares = 4;
   repeated string relations = 5;
   optional string created_by = 6 [(base.mongoType).mongoType = "ObjectID"];
@@ -191,8 +194,7 @@ message BasePropertiesUpdate {
   repeated string tags = 1;
 }
 
-message BaseDatesUpdate {
-}
+message BaseDatesUpdate {}
 
 message BaseAccessRead {
   optional string owner = 1;

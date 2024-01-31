@@ -50,6 +50,11 @@ func (m *MongoMessageOptions) Validate() error {
 	return nil
 }
 
+func (m *MinioOption) Validate() error {
+
+	return nil
+}
+
 func (m *AclOption) Validate() error {
 
 	return nil
