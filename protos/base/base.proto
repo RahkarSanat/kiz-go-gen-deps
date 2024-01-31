@@ -11,6 +11,7 @@ option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/base";
 
 extend google.protobuf.FileOptions {
   CustomFileOptions fileOps = 10001;
+  MinioOption minio = 10002;
 }
 
 message CountRequest {
@@ -65,7 +66,6 @@ extend google.protobuf.MethodOptions {
   AclOption acl = 10001;
   AggregateOption agropt = 10002;
   ViewOption view = 10003;
-  MinioOption minio = 10004;
 }
 
 message AclOption {
