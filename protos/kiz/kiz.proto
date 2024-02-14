@@ -9,7 +9,7 @@ import "gorm/gorm.proto";
 
 option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/kiz";
 
-extend google.protobuf.MessageOptions {
+extend google.protobuf.MethodOptions {
   InterceptorOptions interceptor = 52121;
 }
 
