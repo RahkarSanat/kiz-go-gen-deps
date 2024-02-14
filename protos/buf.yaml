@@ -1,6 +1,6 @@
 ---
 version: v1
-name: buf.build/alipourhabibi/base
+name: buf.build/rahkar-sanat/kiz
 deps:
   - buf.build/bufbuild/protovalidate
   - buf.build/googleapis/googleapis

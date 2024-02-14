@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package kiz;
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/descriptor.proto";
+import "gorm/gorm.proto";
+
+option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/kiz";
+
+extend google.protobuf.MessageOptions {
+  InterceptorOptions interceptor = 52121;
+}
+
+message InterceptorOptions {
+  bool force_all = 1;
+}
