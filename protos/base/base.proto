@@ -43,7 +43,7 @@ message AggregateOption {
 
 message ViewOption {
   bool is_view = 1;
-  string name = 2;
+  repeated string names = 2;
 }
 
 extend google.protobuf.FieldOptions {
