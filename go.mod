@@ -5,7 +5,6 @@ go 1.21.1
 require (
 	github.com/infobloxopen/protoc-gen-gorm v1.1.2
 	github.com/lib/pq v1.3.1-0.20200116171513-9eb3fc897d6f
-	github.com/srikrsna/protoc-gen-gotag v0.6.2
 	google.golang.org/genproto v0.0.0-20231211222908-989df2bf70f3
 	google.golang.org/genproto/googleapis/api v0.0.0-20231212172506-995d672761c0
 	google.golang.org/grpc v1.60.0

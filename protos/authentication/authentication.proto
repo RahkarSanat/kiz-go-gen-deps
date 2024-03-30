@@ -21,8 +21,8 @@ message Void {
 }
 
 message AccessToken {
-  optional string access_token = 1;
-  optional string api_key = 2;
+  string access_token = 1;
+  string api_key = 2;
 }
 
 message AuthRequest {
