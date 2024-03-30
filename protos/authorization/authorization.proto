@@ -11,6 +11,17 @@ service AuthorizationService {
   rpc SanitizeDecrypted(SanitizeDecryptedRequest) returns (SanitizeResponse);
 
   rpc MqttTopicAuthorization(MqttAuthorization) returns (TopicIsAvailable);
+  rpc MqttMessageFieldFilter(MqttFieldFilter) returns (ResponseMqttFieldFilter);
+}
+
+message MqttFieldFilter {
+  string message = 1;
+  string client_info = 2;
+}
+
+message ResponseMqttFieldFilter {
+  string field_message = 1;
+  string filter_message = 2;
 }
 
 message AuthorizeRequest {

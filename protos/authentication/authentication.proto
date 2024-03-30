@@ -21,8 +21,8 @@ message Void {
 }
 
 message AccessToken {
-  string access_token = 1;
-  string api_key = 2;
+  optional string access_token = 1;
+  optional string api_key = 2;
 }
 
 message AuthRequest {
@@ -60,7 +60,7 @@ message AuthToken {
   optional string uid = 3;
   string subjects = 4;
   string scopes = 5;
-  string session = 6;
+  optional string session = 6;
   string client_id = 7;
 
   optional int64 iat = 9;

@@ -27,6 +27,7 @@ type AuthorizationServiceClient interface {
 	Sanitize(ctx context.Context, in *SanitizeRequest, opts ...grpc.CallOption) (*SanitizeResponse, error)
 	SanitizeDecrypted(ctx context.Context, in *SanitizeDecryptedRequest, opts ...grpc.CallOption) (*SanitizeResponse, error)
 	MqttTopicAuthorization(ctx context.Context, in *MqttAuthorization, opts ...grpc.CallOption) (*TopicIsAvailable, error)
+	MqttMessageFieldFilter(ctx context.Context, in *MqttFieldFilter, opts ...grpc.CallOption) (*ResponseMqttFieldFilter, error)
 }
 
 type authorizationServiceClient struct {
@@ -82,6 +83,15 @@ func (c *authorizationServiceClient) MqttTopicAuthorization(ctx context.Context,
 	return out, nil
 }
 
+func (c *authorizationServiceClient) MqttMessageFieldFilter(ctx context.Context, in *MqttFieldFilter, opts ...grpc.CallOption) (*ResponseMqttFieldFilter, error) {
+	out := new(ResponseMqttFieldFilter)
+	err := c.cc.Invoke(ctx, "/auth_authorization.AuthorizationService/MqttMessageFieldFilter", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthorizationServiceServer is the server API for AuthorizationService service.
 // All implementations must embed UnimplementedAuthorizationServiceServer
 // for forward compatibility
@@ -91,6 +101,7 @@ type AuthorizationServiceServer interface {
 	Sanitize(context.Context, *SanitizeRequest) (*SanitizeResponse, error)
 	SanitizeDecrypted(context.Context, *SanitizeDecryptedRequest) (*SanitizeResponse, error)
 	MqttTopicAuthorization(context.Context, *MqttAuthorization) (*TopicIsAvailable, error)
+	MqttMessageFieldFilter(context.Context, *MqttFieldFilter) (*ResponseMqttFieldFilter, error)
 	mustEmbedUnimplementedAuthorizationServiceServer()
 }
 
@@ -112,6 +123,9 @@ func (UnimplementedAuthorizationServiceServer) SanitizeDecrypted(context.Context
 }
 func (UnimplementedAuthorizationServiceServer) MqttTopicAuthorization(context.Context, *MqttAuthorization) (*TopicIsAvailable, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MqttTopicAuthorization not implemented")
+}
+func (UnimplementedAuthorizationServiceServer) MqttMessageFieldFilter(context.Context, *MqttFieldFilter) (*ResponseMqttFieldFilter, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MqttMessageFieldFilter not implemented")
 }
 func (UnimplementedAuthorizationServiceServer) mustEmbedUnimplementedAuthorizationServiceServer() {}
 
@@ -216,6 +230,24 @@ func _AuthorizationService_MqttTopicAuthorization_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthorizationService_MqttMessageFieldFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MqttFieldFilter)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthorizationServiceServer).MqttMessageFieldFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/auth_authorization.AuthorizationService/MqttMessageFieldFilter",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthorizationServiceServer).MqttMessageFieldFilter(ctx, req.(*MqttFieldFilter))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthorizationService_ServiceDesc is the grpc.ServiceDesc for AuthorizationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +274,10 @@ var AuthorizationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MqttTopicAuthorization",
 			Handler:    _AuthorizationService_MqttTopicAuthorization_Handler,
+		},
+		{
+			MethodName: "MqttMessageFieldFilter",
+			Handler:    _AuthorizationService_MqttMessageFieldFilter_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
