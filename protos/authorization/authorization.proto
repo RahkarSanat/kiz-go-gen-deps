@@ -120,5 +120,6 @@ message MqttAuthorization {
 }
 
 message TopicIsAvailable {
-  string available = 1;
+  optional string available = 1;
+  bool allow = 2;
 }
