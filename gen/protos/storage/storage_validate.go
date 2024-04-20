@@ -2,6 +2,7 @@ package storage
 
 import (
 	"fmt"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -30,8 +31,8 @@ type WriteObjectResponseMongo struct {
 	PersistedSize int64 `bson:"persisted_size" json:"persisted_size"`
 }
 type ChecksummedDataMongo struct {
-	Content bytes   `bson:"content" json:"content"`
-	Crc32C  fixed32 `bson:"crc32c" json:"crc32c"`
+	Content []byte  `bson:"content" json:"content"`
+	Crc32C  float32 `bson:"crc32c" json:"crc32c"`
 }
 
 func (m *ReadObjectRequest) Validate() error {

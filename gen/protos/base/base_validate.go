@@ -2,6 +2,7 @@ package base
 
 import (
 	"fmt"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -103,9 +104,9 @@ type BasePropertiesMongo struct {
 	Version    string              `bson:"version" json:"version"`
 }
 type BaseDatesMongo struct {
-	Id         string              `bson:"id" json:"id"`
+	Id         string              `bson:"id" json:"id,omitempty"`
 	CreatedAt  *primitive.DateTime `bson:"created_at" json:"created_at"`
-	UpdatedAt  *primitive.DateTime `bson:"updated_at" json:"updated_at"`
+	UpdatedAt  *primitive.DateTime `bson:"updated_at,omitempty" json:"updated_at,omitempty"`
 	DeletedAt  *primitive.DateTime `bson:"deleted_at" json:"deleted_at"`
 	RestoredAt *primitive.DateTime `bson:"restored_at" json:"restored_at"`
 }
