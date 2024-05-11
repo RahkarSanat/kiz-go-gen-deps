@@ -74,7 +74,7 @@ type FilterMongo struct {
 	ExcludeOwn      *bool            `bson:"exclude_own,omitempty" json:"exclude_own,omitempty"`
 	ExcludeZone     *bool            `bson:"exclude_zone,omitempty" json:"exclude_zone,omitempty"`
 	ExcludeShare    *bool            `bson:"exclude_share,omitempty" json:"exclude_share,omitempty"`
-	ExcludeRelatoin *bool            `bson:"exclude_relatoin,omitempty" json:"exclude_relatoin,omitempty"`
+	ExcludeRelation *bool            `bson:"exclude_relation,omitempty" json:"exclude_relation,omitempty"`
 	IsTrash         *bool            `bson:"is_trash,omitempty" json:"is_trash,omitempty"`
 }
 type OperationsMongo struct {

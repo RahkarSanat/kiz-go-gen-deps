@@ -455,7 +455,7 @@ type Filter struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -542,7 +542,7 @@ type Operations struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -674,7 +674,7 @@ type Total struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -809,7 +809,7 @@ type BaseAccess struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -974,7 +974,7 @@ type BaseProperties struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -1160,7 +1160,7 @@ type BaseDates struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -1361,7 +1361,7 @@ type BaseAccessUpdate struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -1574,7 +1574,7 @@ type BasePropertiesUpdate struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -1790,7 +1790,7 @@ type BaseDatesUpdate struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -2006,7 +2006,7 @@ type BaseAccessRead struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -2249,7 +2249,7 @@ type BasePropertiesRead struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``
@@ -2510,7 +2510,7 @@ type BaseDatesRead struct {
 	ExcludeShare bool ``
 
 	// NOT MESSAGE
-	ExcludeRelatoin bool ``
+	ExcludeRelation bool ``
 
 	// NOT MESSAGE
 	IsTrash bool ``

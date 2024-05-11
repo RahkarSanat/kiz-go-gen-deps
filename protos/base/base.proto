@@ -93,7 +93,7 @@ message Filter {
   optional bool exclude_own = 4;
   optional bool exclude_zone = 5;
   optional bool exclude_share = 6;
-  optional bool exclude_relatoin = 7;
+  optional bool exclude_relation = 7;
   optional bool is_trash = 8;
 }
 
