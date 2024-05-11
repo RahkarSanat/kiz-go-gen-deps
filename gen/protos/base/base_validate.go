@@ -6,9 +6,14 @@ import (
 	reflect "reflect"
 	"strings"
 
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+var _ codes.Code
+var _ status.Status
 var _ reflect.Kind
 var _ primitive.A
 var _ fmt.Stringer
@@ -23,8 +28,8 @@ type FindRequestMongo struct {
 	Filter *FilterMongo `bson:"filter,omitempty" json:"filter,omitempty"`
 }
 type FindByIDRequestMongo struct {
-	Id     primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	Filter *FilterMongo       `bson:"filter,omitempty" json:"filter,omitempty"`
+	Id     string       `bson:"id" json:"id"`
+	Filter *FilterMongo `bson:"filter,omitempty" json:"filter,omitempty"`
 }
 type CustomFileOptionsMongo struct {
 	Ignore *bool   `bson:"ignore,omitempty" json:"ignore,omitempty"`
@@ -93,7 +98,7 @@ type TotalMongo struct {
 	Count *int64 `bson:"count,omitempty" json:"count,omitempty"`
 }
 type BaseAccessMongo struct {
-	Id         *primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
+	Id         *string             `bson:"id,omitempty" json:"id,omitempty"`
 	Owner      string              `bson:"owner" json:"owner"`
 	Zones      []string            `bson:"zones,omitempty" json:"zones,omitempty"`
 	Clients    []string            `bson:"clients" json:"clients"`
@@ -105,7 +110,7 @@ type BaseAccessMongo struct {
 	RestoredBy *primitive.ObjectID `bson:"restored_by,omitempty" json:"restored_by,omitempty"`
 }
 type BasePropertiesMongo struct {
-	Id         *primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
+	Id         *string             `bson:"id,omitempty" json:"id,omitempty"`
 	CreatedIn  *primitive.ObjectID `bson:"created_in,omitempty" json:"created_in,omitempty"`
 	UpdatedIn  *primitive.ObjectID `bson:"updated_in,omitempty" json:"updated_in,omitempty"`
 	DeletedIn  *primitive.ObjectID `bson:"deleted_in,omitempty" json:"deleted_in,omitempty"`
@@ -114,7 +119,7 @@ type BasePropertiesMongo struct {
 	Version    *string             `bson:"version,omitempty" json:"version,omitempty"`
 }
 type BaseDatesMongo struct {
-	Id         *primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
+	Id         *string             `bson:"id,omitempty" json:"id,omitempty"`
 	CreatedAt  *primitive.DateTime `bson:"created_at,omitempty" json:"created_at,omitempty"`
 	UpdatedAt  *primitive.DateTime `bson:"updated_at,omitempty" json:"updated_at,omitempty"`
 	DeletedAt  *primitive.DateTime `bson:"deleted_at,omitempty" json:"deleted_at,omitempty"`
@@ -199,7 +204,8 @@ func (m *FindRequest) Validate() error {
 func (m *FindByIDRequest) Validate() error {
 
 	if m.Id == "" {
-		return fmt.Errorf("Id is required")
+		err := status.Error(codes.InvalidArgument, "Id is required")
+		return err
 	}
 
 	return nil
@@ -268,11 +274,13 @@ func (m *Total) Validate() error {
 func (m *BaseAccess) Validate() error {
 
 	if m.Owner == "" {
-		return fmt.Errorf("Owner is required")
+		err := status.Error(codes.InvalidArgument, "Owner is required")
+		return err
 	}
 
 	if m.Clients == nil {
-		return fmt.Errorf("Clients is required")
+		err := status.Error(codes.InvalidArgument, "Clients is required")
+		return err
 	}
 
 	return nil

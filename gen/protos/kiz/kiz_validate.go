@@ -6,11 +6,16 @@ import (
 	reflect "reflect"
 	"strings"
 
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
+
 	base "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/base"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+var _ codes.Code
+var _ status.Status
 var _ reflect.Kind
 var _ primitive.A
 var _ fmt.Stringer

@@ -3,7 +3,7 @@ package base
 import (
 	context "context"
 	fmt "fmt"
-	errors "github.com/infobloxopen/protoc-gen-gorm/errors"
+	errors "github.com/RahkarSanat/protoc-gen-gorm/errors"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 	gorm "gorm.io/gorm"
 )

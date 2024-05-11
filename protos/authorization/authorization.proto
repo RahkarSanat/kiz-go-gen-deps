@@ -86,7 +86,7 @@ message SanitizeRequest {
   optional bool exclude_own = 9;
   optional bool exclude_zone = 10;
   optional bool exclude_share = 11;
-  optional bool exclude_relatoin = 12;
+  optional bool exclude_relation = 12;
 }
 
 message SanitizeDecryptedRequest {
@@ -101,7 +101,7 @@ message SanitizeDecryptedRequest {
   optional bool exclude_own = 9;
   optional bool exclude_zone = 10;
   optional bool exclude_share = 11;
-  optional bool exclude_relatoin = 12;
+  optional bool exclude_relation = 12;
 }
 
 message SanitizeResponse {
