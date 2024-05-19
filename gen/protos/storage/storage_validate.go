@@ -50,6 +50,13 @@ type ChecksummedDataMongo struct {
 	Content *[]byte `bson:"content,omitempty" json:"content,omitempty"`
 	Crc32C  *uint32 `bson:"crc32c,omitempty" json:"crc32c,omitempty"`
 }
+type DeleteObjectRequestMongo struct {
+	Bucket *string `bson:"bucket,omitempty" json:"bucket,omitempty"`
+	Object *string `bson:"object,omitempty" json:"object,omitempty"`
+}
+type DeleteObjectResponseMongo struct {
+	Status *bool `bson:"status,omitempty" json:"status,omitempty"`
+}
 
 func isZero(x interface{}) bool {
 	return reflect.DeepEqual(x, reflect.Zero(reflect.TypeOf(x)).Interface())
@@ -106,6 +113,16 @@ func (m *WriteObjectResponse) Validate() error {
 }
 
 func (m *ChecksummedData) Validate() error {
+
+	return nil
+}
+
+func (m *DeleteObjectRequest) Validate() error {
+
+	return nil
+}
+
+func (m *DeleteObjectResponse) Validate() error {
 
 	return nil
 }

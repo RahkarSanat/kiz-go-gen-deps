@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Storage_ReadObject_FullMethodName  = "/storage.Storage/ReadObject"
-	Storage_WriteObject_FullMethodName = "/storage.Storage/WriteObject"
+	Storage_ReadObject_FullMethodName   = "/storage.Storage/ReadObject"
+	Storage_WriteObject_FullMethodName  = "/storage.Storage/WriteObject"
+	Storage_DeleteObject_FullMethodName = "/storage.Storage/DeleteObject"
 )
 
 // StorageClient is the client API for Storage service.
@@ -29,6 +30,7 @@ const (
 type StorageClient interface {
 	ReadObject(ctx context.Context, in *ReadObjectRequest, opts ...grpc.CallOption) (Storage_ReadObjectClient, error)
 	WriteObject(ctx context.Context, opts ...grpc.CallOption) (Storage_WriteObjectClient, error)
+	DeleteObject(ctx context.Context, in *DeleteObjectRequest, opts ...grpc.CallOption) (*DeleteObjectResponse, error)
 }
 
 type storageClient struct {
@@ -105,12 +107,22 @@ func (x *storageWriteObjectClient) CloseAndRecv() (*WriteObjectResponse, error) 
 	return m, nil
 }
 
+func (c *storageClient) DeleteObject(ctx context.Context, in *DeleteObjectRequest, opts ...grpc.CallOption) (*DeleteObjectResponse, error) {
+	out := new(DeleteObjectResponse)
+	err := c.cc.Invoke(ctx, Storage_DeleteObject_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StorageServer is the server API for Storage service.
 // All implementations must embed UnimplementedStorageServer
 // for forward compatibility
 type StorageServer interface {
 	ReadObject(*ReadObjectRequest, Storage_ReadObjectServer) error
 	WriteObject(Storage_WriteObjectServer) error
+	DeleteObject(context.Context, *DeleteObjectRequest) (*DeleteObjectResponse, error)
 	mustEmbedUnimplementedStorageServer()
 }
 
@@ -123,6 +135,9 @@ func (UnimplementedStorageServer) ReadObject(*ReadObjectRequest, Storage_ReadObj
 }
 func (UnimplementedStorageServer) WriteObject(Storage_WriteObjectServer) error {
 	return status.Errorf(codes.Unimplemented, "method WriteObject not implemented")
+}
+func (UnimplementedStorageServer) DeleteObject(context.Context, *DeleteObjectRequest) (*DeleteObjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteObject not implemented")
 }
 func (UnimplementedStorageServer) mustEmbedUnimplementedStorageServer() {}
 
@@ -184,13 +199,36 @@ func (x *storageWriteObjectServer) Recv() (*WriteObjectRequest, error) {
 	return m, nil
 }
 
+func _Storage_DeleteObject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteObjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StorageServer).DeleteObject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Storage_DeleteObject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StorageServer).DeleteObject(ctx, req.(*DeleteObjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Storage_ServiceDesc is the grpc.ServiceDesc for Storage service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Storage_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "storage.Storage",
 	HandlerType: (*StorageServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DeleteObject",
+			Handler:    _Storage_DeleteObject_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ReadObject",

@@ -49,8 +49,19 @@ message ChecksummedData {
   optional fixed32 crc32c = 2;
 }
 
+message DeleteObjectRequest {
+  string bucket = 1;
+
+  string object = 2;
+}
+
+message DeleteObjectResponse {
+  bool status = 1;
+}
+
 service Storage {
   option (gorm.server).autogen = false;
   rpc ReadObject(ReadObjectRequest) returns (stream ReadObjectResponse);
   rpc WriteObject(stream WriteObjectRequest) returns (WriteObjectResponse);
+  rpc DeleteObject(DeleteObjectRequest) returns (DeleteObjectResponse);
 }
