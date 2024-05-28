@@ -7,7 +7,7 @@
 package storage
 
 import (
-	_ "github.com/infobloxopen/protoc-gen-gorm/options"
+	_ "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/gorm"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

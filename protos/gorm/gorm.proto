@@ -4,7 +4,7 @@ package gorm;
 
 import "google/protobuf/descriptor.proto";
 
-option go_package = "github.com/infobloxopen/protoc-gen-gorm/options;gorm";
+option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/gorm;gorm";
 
 // TODO: The option number 52119 lies within the internally reserved extension
 // range. I believe a publicly unique number should be requested.

@@ -7,7 +7,7 @@
 package base
 
 import (
-	_ "github.com/infobloxopen/protoc-gen-gorm/options"
+	_ "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/gorm"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
