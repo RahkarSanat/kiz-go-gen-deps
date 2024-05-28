@@ -66,7 +66,6 @@ func FlattenHelper(prefix string, obj interface{}, flatMap map[string]interface{
 			FlattenHelper(prefix+name+".", val.Field(i).Interface(), flatMap)
 		}
 	default:
-		fmt.Println(obj)
 		if obj != nil && !isZero(obj) {
 			flatMap[prefix[:len(prefix)-1]] = obj
 		}

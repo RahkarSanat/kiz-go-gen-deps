@@ -14,7 +14,9 @@ extend google.protobuf.FileOptions {
   GormFileOptions file_opts = 52119;
 }
 
-message GormFileOptions {}
+message GormFileOptions {
+  bool ignore = 1;
+}
 
 // Validation rules applied at the message level
 extend google.protobuf.MessageOptions {
