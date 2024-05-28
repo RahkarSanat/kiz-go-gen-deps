@@ -9,6 +9,8 @@ import "gorm/gorm.proto";
 
 option go_package = "github.com/RahkarSanat/kiz-go-gen-deps/gen/protos/base";
 
+option (gorm.file_opts).force = true;
+
 extend google.protobuf.FileOptions {
   CustomFileOptions fileOps = 10001;
   MinioOption minio = 10002;

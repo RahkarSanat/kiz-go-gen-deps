@@ -4,6 +4,8 @@ package storage;
 
 import "gorm/gorm.proto";
 
+option (gorm.file_opts).force = true;
+
 option go_package = "./storage";
 
 message ReadObjectRequest {

@@ -24,6 +24,7 @@ var _ strings.Builder
 type GormFileOptionsMongo struct {
 	Ignore *bool   `bson:"ignore,omitempty" json:"ignore,omitempty"`
 	Engine *string `bson:"engine,omitempty" json:"engine,omitempty"`
+	Force  *bool   `bson:"force,omitempty" json:"force,omitempty"`
 }
 type GormMessageOptionsMongo struct {
 	Ormable      *bool             `bson:"ormable,omitempty" json:"ormable,omitempty"`
