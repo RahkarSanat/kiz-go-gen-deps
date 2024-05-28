@@ -16,6 +16,7 @@ extend google.protobuf.FileOptions {
 
 message GormFileOptions {
   bool ignore = 1;
+  string engine = 2;
 }
 
 // Validation rules applied at the message level
