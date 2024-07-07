@@ -36,8 +36,31 @@ type WriteObjectRequestMongo struct {
 	FinishWrite  *bool                 `bson:"finish_write,omitempty" json:"finish_write,omitempty"`
 }
 type FirstMessageMongo struct {
-	Prefix *string `bson:"prefix,omitempty" json:"prefix,omitempty"`
-	Name   *string `bson:"name,omitempty" json:"name,omitempty"`
+	Prefix  *string            `bson:"prefix,omitempty" json:"prefix,omitempty"`
+	Name    *string            `bson:"name,omitempty" json:"name,omitempty"`
+	Queries *map[string]string `bson:"queries,omitempty" json:"queries,omitempty"`
+}
+type StatObjectRequestMongo struct {
+	Prefix  *string            `bson:"prefix,omitempty" json:"prefix,omitempty"`
+	Name    *string            `bson:"name,omitempty" json:"name,omitempty"`
+	Queries *map[string]string `bson:"queries,omitempty" json:"queries,omitempty"`
+}
+type StatObjectResponseMongo struct {
+	Name     *string            `bson:"name,omitempty" json:"name,omitempty"`
+	Metadata *map[string]string `bson:"metadata,omitempty" json:"metadata,omitempty"`
+}
+type MetadataOperationMongo struct {
+	Op    *string `bson:"op,omitempty" json:"op,omitempty"`
+	Value *string `bson:"value,omitempty" json:"value,omitempty"`
+}
+type EditObjectMetadataRequestMongo struct {
+	Name     *string                            `bson:"name,omitempty" json:"name,omitempty"`
+	Queries  *map[string]string                 `bson:"queries,omitempty" json:"queries,omitempty"`
+	Metadata *map[string]MetadataOperationMongo `bson:"metadata,omitempty" json:"metadata,omitempty"`
+}
+type EditObjectMetadataResponseMongo struct {
+	Name     *string            `bson:"name,omitempty" json:"name,omitempty"`
+	Metadata *map[string]string `bson:"metadata,omitempty" json:"metadata,omitempty"`
 }
 type ReadObjectResponseMongo struct {
 	FirstMessage    *FirstMessageMongo    `bson:"first_message,omitempty" json:"first_message,omitempty"`
@@ -51,8 +74,9 @@ type ChecksummedDataMongo struct {
 	Crc32C  *uint32 `bson:"crc32c,omitempty" json:"crc32c,omitempty"`
 }
 type DeleteObjectRequestMongo struct {
-	Bucket *string `bson:"bucket,omitempty" json:"bucket,omitempty"`
-	Object *string `bson:"object,omitempty" json:"object,omitempty"`
+	Bucket  *string            `bson:"bucket,omitempty" json:"bucket,omitempty"`
+	Object  *string            `bson:"object,omitempty" json:"object,omitempty"`
+	Queries *map[string]string `bson:"queries,omitempty" json:"queries,omitempty"`
 }
 type DeleteObjectResponseMongo struct {
 	Status *bool `bson:"status,omitempty" json:"status,omitempty"`
@@ -79,6 +103,27 @@ func FlattenHelper(prefix string, obj interface{}, flatMap map[string]interface{
 			name := strings.Split(field.Tag.Get("json"), ",")[0]
 			FlattenHelper(prefix+name+".", val.Field(i).Interface(), flatMap)
 		}
+
+	case reflect.Map:
+		switch t := obj.(type) {
+		case *map[string]any:
+			for k, v := range *t {
+				FlattenHelper(prefix+k+".", v, flatMap)
+			}
+		case map[string]any:
+			for k, v := range t {
+				FlattenHelper(prefix+k+".", v, flatMap)
+			}
+		case *map[string]string:
+			for k, v := range *t {
+				FlattenHelper(prefix+k+".", v, flatMap)
+			}
+		case map[string]string:
+			for k, v := range t {
+				FlattenHelper(prefix+k+".", v, flatMap)
+			}
+		}
+
 	default:
 		if obj != nil && !isZero(obj) {
 			flatMap[prefix[:len(prefix)-1]] = obj
@@ -97,6 +142,31 @@ func (m *WriteObjectRequest) Validate() error {
 }
 
 func (m *FirstMessage) Validate() error {
+
+	return nil
+}
+
+func (m *StatObjectRequest) Validate() error {
+
+	return nil
+}
+
+func (m *StatObjectResponse) Validate() error {
+
+	return nil
+}
+
+func (m *MetadataOperation) Validate() error {
+
+	return nil
+}
+
+func (m *EditObjectMetadataRequest) Validate() error {
+
+	return nil
+}
+
+func (m *EditObjectMetadataResponse) Validate() error {
 
 	return nil
 }

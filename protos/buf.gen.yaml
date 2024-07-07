@@ -1,17 +1,15 @@
----
-version: v1
-
+version: v2
 plugins:
-  - plugin: go
-    opt: paths=source_relative
+  - local: protoc-gen-go
     out: ../gen/protos
-  - plugin: go-grpc
     opt: paths=source_relative
+  - local: protoc-gen-go-grpc
     out: ../gen/protos
-  - plugin: kiz-crud
     opt: paths=source_relative
+  - local: protoc-gen-kiz-crud
     out: ../gen
+    opt: paths=source_relative
     strategy: all
-  - plugin: gorm
-    opt: engine=clickhouse,paths=source_relative
+  - local: protoc-gen-gorm
     out: ../gen/protos
+    opt: engine=clickhouse,paths=source_relative

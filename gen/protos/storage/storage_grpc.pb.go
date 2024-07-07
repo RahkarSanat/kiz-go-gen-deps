@@ -19,9 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Storage_ReadObject_FullMethodName   = "/storage.Storage/ReadObject"
-	Storage_WriteObject_FullMethodName  = "/storage.Storage/WriteObject"
-	Storage_DeleteObject_FullMethodName = "/storage.Storage/DeleteObject"
+	Storage_ReadObject_FullMethodName         = "/storage.Storage/ReadObject"
+	Storage_WriteObject_FullMethodName        = "/storage.Storage/WriteObject"
+	Storage_DeleteObject_FullMethodName       = "/storage.Storage/DeleteObject"
+	Storage_StatObject_FullMethodName         = "/storage.Storage/StatObject"
+	Storage_EditObjectMetadata_FullMethodName = "/storage.Storage/EditObjectMetadata"
 )
 
 // StorageClient is the client API for Storage service.
@@ -31,6 +33,8 @@ type StorageClient interface {
 	ReadObject(ctx context.Context, in *ReadObjectRequest, opts ...grpc.CallOption) (Storage_ReadObjectClient, error)
 	WriteObject(ctx context.Context, opts ...grpc.CallOption) (Storage_WriteObjectClient, error)
 	DeleteObject(ctx context.Context, in *DeleteObjectRequest, opts ...grpc.CallOption) (*DeleteObjectResponse, error)
+	StatObject(ctx context.Context, in *StatObjectRequest, opts ...grpc.CallOption) (*StatObjectResponse, error)
+	EditObjectMetadata(ctx context.Context, in *EditObjectMetadataRequest, opts ...grpc.CallOption) (*EditObjectMetadataResponse, error)
 }
 
 type storageClient struct {
@@ -116,6 +120,24 @@ func (c *storageClient) DeleteObject(ctx context.Context, in *DeleteObjectReques
 	return out, nil
 }
 
+func (c *storageClient) StatObject(ctx context.Context, in *StatObjectRequest, opts ...grpc.CallOption) (*StatObjectResponse, error) {
+	out := new(StatObjectResponse)
+	err := c.cc.Invoke(ctx, Storage_StatObject_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storageClient) EditObjectMetadata(ctx context.Context, in *EditObjectMetadataRequest, opts ...grpc.CallOption) (*EditObjectMetadataResponse, error) {
+	out := new(EditObjectMetadataResponse)
+	err := c.cc.Invoke(ctx, Storage_EditObjectMetadata_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StorageServer is the server API for Storage service.
 // All implementations must embed UnimplementedStorageServer
 // for forward compatibility
@@ -123,6 +145,8 @@ type StorageServer interface {
 	ReadObject(*ReadObjectRequest, Storage_ReadObjectServer) error
 	WriteObject(Storage_WriteObjectServer) error
 	DeleteObject(context.Context, *DeleteObjectRequest) (*DeleteObjectResponse, error)
+	StatObject(context.Context, *StatObjectRequest) (*StatObjectResponse, error)
+	EditObjectMetadata(context.Context, *EditObjectMetadataRequest) (*EditObjectMetadataResponse, error)
 	mustEmbedUnimplementedStorageServer()
 }
 
@@ -138,6 +162,12 @@ func (UnimplementedStorageServer) WriteObject(Storage_WriteObjectServer) error {
 }
 func (UnimplementedStorageServer) DeleteObject(context.Context, *DeleteObjectRequest) (*DeleteObjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteObject not implemented")
+}
+func (UnimplementedStorageServer) StatObject(context.Context, *StatObjectRequest) (*StatObjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StatObject not implemented")
+}
+func (UnimplementedStorageServer) EditObjectMetadata(context.Context, *EditObjectMetadataRequest) (*EditObjectMetadataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditObjectMetadata not implemented")
 }
 func (UnimplementedStorageServer) mustEmbedUnimplementedStorageServer() {}
 
@@ -217,6 +247,42 @@ func _Storage_DeleteObject_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Storage_StatObject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StatObjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StorageServer).StatObject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Storage_StatObject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StorageServer).StatObject(ctx, req.(*StatObjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Storage_EditObjectMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditObjectMetadataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StorageServer).EditObjectMetadata(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Storage_EditObjectMetadata_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StorageServer).EditObjectMetadata(ctx, req.(*EditObjectMetadataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Storage_ServiceDesc is the grpc.ServiceDesc for Storage service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -227,6 +293,14 @@ var Storage_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteObject",
 			Handler:    _Storage_DeleteObject_Handler,
+		},
+		{
+			MethodName: "StatObject",
+			Handler:    _Storage_StatObject_Handler,
+		},
+		{
+			MethodName: "EditObjectMetadata",
+			Handler:    _Storage_EditObjectMetadata_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

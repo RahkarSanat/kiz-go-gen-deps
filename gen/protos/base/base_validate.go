@@ -183,6 +183,27 @@ func FlattenHelper(prefix string, obj interface{}, flatMap map[string]interface{
 			name := strings.Split(field.Tag.Get("json"), ",")[0]
 			FlattenHelper(prefix+name+".", val.Field(i).Interface(), flatMap)
 		}
+
+	case reflect.Map:
+		switch t := obj.(type) {
+		case *map[string]any:
+			for k, v := range *t {
+				FlattenHelper(prefix+k+".", v, flatMap)
+			}
+		case map[string]any:
+			for k, v := range t {
+				FlattenHelper(prefix+k+".", v, flatMap)
+			}
+		case *map[string]string:
+			for k, v := range *t {
+				FlattenHelper(prefix+k+".", v, flatMap)
+			}
+		case map[string]string:
+			for k, v := range t {
+				FlattenHelper(prefix+k+".", v, flatMap)
+			}
+		}
+
 	default:
 		if obj != nil && !isZero(obj) {
 			flatMap[prefix[:len(prefix)-1]] = obj
