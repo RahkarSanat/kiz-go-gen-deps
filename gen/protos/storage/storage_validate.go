@@ -26,9 +26,10 @@ var _ json.Marshaler
 var _ strings.Builder
 
 type ReadObjectRequestMongo struct {
-	Prefix *string `bson:"prefix,omitempty" json:"prefix,omitempty"`
-	Object *string `bson:"object,omitempty" json:"object,omitempty"`
-	Title  *string `bson:"title,omitempty" json:"title,omitempty"`
+	Prefix  *string            `bson:"prefix,omitempty" json:"prefix,omitempty"`
+	Object  *string            `bson:"object,omitempty" json:"object,omitempty"`
+	Title   *string            `bson:"title,omitempty" json:"title,omitempty"`
+	Queries *map[string]string `bson:"queries,omitempty" json:"queries,omitempty"`
 }
 type WriteObjectRequestMongo struct {
 	FirstMessage *FirstMessageMongo    `bson:"first_message,omitempty" json:"first_message,omitempty"`

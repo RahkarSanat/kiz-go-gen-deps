@@ -12,6 +12,7 @@ message ReadObjectRequest {
   string prefix = 1;
   string object = 2;
   string title = 3;
+  map<string, string> queries = 4;
 }
 
 message WriteObjectRequest {

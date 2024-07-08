@@ -26,9 +26,10 @@ type ReadObjectRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Prefix string `protobuf:"bytes,1,opt,name=prefix,proto3" json:"prefix,omitempty"`
-	Object string `protobuf:"bytes,2,opt,name=object,proto3" json:"object,omitempty"`
-	Title  string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Prefix  string            `protobuf:"bytes,1,opt,name=prefix,proto3" json:"prefix,omitempty"`
+	Object  string            `protobuf:"bytes,2,opt,name=object,proto3" json:"object,omitempty"`
+	Title   string            `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Queries map[string]string `protobuf:"bytes,4,rep,name=queries,proto3" json:"queries,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *ReadObjectRequest) Reset() {
@@ -82,6 +83,13 @@ func (x *ReadObjectRequest) GetTitle() string {
 		return x.Title
 	}
 	return ""
+}
+
+func (x *ReadObjectRequest) GetQueries() map[string]string {
+	if x != nil {
+		return x.Queries
+	}
+	return nil
 }
 
 type WriteObjectRequest struct {
@@ -805,12 +813,20 @@ var file_storage_storage_proto_rawDesc = []byte{
 	0x0a, 0x15, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x2f, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67,
 	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65,
 	0x1a, 0x0f, 0x67, 0x6f, 0x72, 0x6d, 0x2f, 0x67, 0x6f, 0x72, 0x6d, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x22, 0x59, 0x0a, 0x11, 0x52, 0x65, 0x61, 0x64, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x12, 0x16,
-	0x0a, 0x06, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
-	0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x22, 0xa1, 0x01, 0x0a,
+	0x6f, 0x22, 0xd8, 0x01, 0x0a, 0x11, 0x52, 0x65, 0x61, 0x64, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69,
+	0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x72, 0x65, 0x66, 0x69, 0x78, 0x12,
+	0x16, 0x0a, 0x06, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x41, 0x0a,
+	0x07, 0x71, 0x75, 0x65, 0x72, 0x69, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x27,
+	0x2e, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x4f, 0x62, 0x6a,
+	0x65, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x69,
+	0x65, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x07, 0x71, 0x75, 0x65, 0x72, 0x69, 0x65, 0x73,
+	0x1a, 0x3a, 0x0a, 0x0c, 0x51, 0x75, 0x65, 0x72, 0x69, 0x65, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79,
+	0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b,
+	0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xa1, 0x01, 0x0a,
 	0x12, 0x57, 0x72, 0x69, 0x74, 0x65, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x3a, 0x0a, 0x0d, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73,
 	0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x73, 0x74, 0x6f,
@@ -971,7 +987,7 @@ func file_storage_storage_proto_rawDescGZIP() []byte {
 	return file_storage_storage_proto_rawDescData
 }
 
-var file_storage_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_storage_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_storage_storage_proto_goTypes = []interface{}{
 	(*ReadObjectRequest)(nil),          // 0: storage.ReadObjectRequest
 	(*WriteObjectRequest)(nil),         // 1: storage.WriteObjectRequest
@@ -986,42 +1002,44 @@ var file_storage_storage_proto_goTypes = []interface{}{
 	(*ChecksummedData)(nil),            // 10: storage.ChecksummedData
 	(*DeleteObjectRequest)(nil),        // 11: storage.DeleteObjectRequest
 	(*DeleteObjectResponse)(nil),       // 12: storage.DeleteObjectResponse
-	nil,                                // 13: storage.FirstMessage.QueriesEntry
-	nil,                                // 14: storage.StatObjectRequest.QueriesEntry
-	nil,                                // 15: storage.StatObjectResponse.MetadataEntry
-	nil,                                // 16: storage.EditObjectMetadataRequest.QueriesEntry
-	nil,                                // 17: storage.EditObjectMetadataRequest.MetadataEntry
-	nil,                                // 18: storage.EditObjectMetadataResponse.MetadataEntry
-	nil,                                // 19: storage.DeleteObjectRequest.QueriesEntry
+	nil,                                // 13: storage.ReadObjectRequest.QueriesEntry
+	nil,                                // 14: storage.FirstMessage.QueriesEntry
+	nil,                                // 15: storage.StatObjectRequest.QueriesEntry
+	nil,                                // 16: storage.StatObjectResponse.MetadataEntry
+	nil,                                // 17: storage.EditObjectMetadataRequest.QueriesEntry
+	nil,                                // 18: storage.EditObjectMetadataRequest.MetadataEntry
+	nil,                                // 19: storage.EditObjectMetadataResponse.MetadataEntry
+	nil,                                // 20: storage.DeleteObjectRequest.QueriesEntry
 }
 var file_storage_storage_proto_depIdxs = []int32{
-	2,  // 0: storage.WriteObjectRequest.first_message:type_name -> storage.FirstMessage
-	10, // 1: storage.WriteObjectRequest.data:type_name -> storage.ChecksummedData
-	13, // 2: storage.FirstMessage.queries:type_name -> storage.FirstMessage.QueriesEntry
-	14, // 3: storage.StatObjectRequest.queries:type_name -> storage.StatObjectRequest.QueriesEntry
-	15, // 4: storage.StatObjectResponse.metadata:type_name -> storage.StatObjectResponse.MetadataEntry
-	16, // 5: storage.EditObjectMetadataRequest.queries:type_name -> storage.EditObjectMetadataRequest.QueriesEntry
-	17, // 6: storage.EditObjectMetadataRequest.metadata:type_name -> storage.EditObjectMetadataRequest.MetadataEntry
-	18, // 7: storage.EditObjectMetadataResponse.metadata:type_name -> storage.EditObjectMetadataResponse.MetadataEntry
-	2,  // 8: storage.ReadObjectResponse.first_message:type_name -> storage.FirstMessage
-	10, // 9: storage.ReadObjectResponse.checksummed_data:type_name -> storage.ChecksummedData
-	19, // 10: storage.DeleteObjectRequest.queries:type_name -> storage.DeleteObjectRequest.QueriesEntry
-	5,  // 11: storage.EditObjectMetadataRequest.MetadataEntry.value:type_name -> storage.MetadataOperation
-	0,  // 12: storage.Storage.ReadObject:input_type -> storage.ReadObjectRequest
-	1,  // 13: storage.Storage.WriteObject:input_type -> storage.WriteObjectRequest
-	11, // 14: storage.Storage.DeleteObject:input_type -> storage.DeleteObjectRequest
-	3,  // 15: storage.Storage.StatObject:input_type -> storage.StatObjectRequest
-	6,  // 16: storage.Storage.EditObjectMetadata:input_type -> storage.EditObjectMetadataRequest
-	8,  // 17: storage.Storage.ReadObject:output_type -> storage.ReadObjectResponse
-	9,  // 18: storage.Storage.WriteObject:output_type -> storage.WriteObjectResponse
-	12, // 19: storage.Storage.DeleteObject:output_type -> storage.DeleteObjectResponse
-	4,  // 20: storage.Storage.StatObject:output_type -> storage.StatObjectResponse
-	7,  // 21: storage.Storage.EditObjectMetadata:output_type -> storage.EditObjectMetadataResponse
-	17, // [17:22] is the sub-list for method output_type
-	12, // [12:17] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	13, // 0: storage.ReadObjectRequest.queries:type_name -> storage.ReadObjectRequest.QueriesEntry
+	2,  // 1: storage.WriteObjectRequest.first_message:type_name -> storage.FirstMessage
+	10, // 2: storage.WriteObjectRequest.data:type_name -> storage.ChecksummedData
+	14, // 3: storage.FirstMessage.queries:type_name -> storage.FirstMessage.QueriesEntry
+	15, // 4: storage.StatObjectRequest.queries:type_name -> storage.StatObjectRequest.QueriesEntry
+	16, // 5: storage.StatObjectResponse.metadata:type_name -> storage.StatObjectResponse.MetadataEntry
+	17, // 6: storage.EditObjectMetadataRequest.queries:type_name -> storage.EditObjectMetadataRequest.QueriesEntry
+	18, // 7: storage.EditObjectMetadataRequest.metadata:type_name -> storage.EditObjectMetadataRequest.MetadataEntry
+	19, // 8: storage.EditObjectMetadataResponse.metadata:type_name -> storage.EditObjectMetadataResponse.MetadataEntry
+	2,  // 9: storage.ReadObjectResponse.first_message:type_name -> storage.FirstMessage
+	10, // 10: storage.ReadObjectResponse.checksummed_data:type_name -> storage.ChecksummedData
+	20, // 11: storage.DeleteObjectRequest.queries:type_name -> storage.DeleteObjectRequest.QueriesEntry
+	5,  // 12: storage.EditObjectMetadataRequest.MetadataEntry.value:type_name -> storage.MetadataOperation
+	0,  // 13: storage.Storage.ReadObject:input_type -> storage.ReadObjectRequest
+	1,  // 14: storage.Storage.WriteObject:input_type -> storage.WriteObjectRequest
+	11, // 15: storage.Storage.DeleteObject:input_type -> storage.DeleteObjectRequest
+	3,  // 16: storage.Storage.StatObject:input_type -> storage.StatObjectRequest
+	6,  // 17: storage.Storage.EditObjectMetadata:input_type -> storage.EditObjectMetadataRequest
+	8,  // 18: storage.Storage.ReadObject:output_type -> storage.ReadObjectResponse
+	9,  // 19: storage.Storage.WriteObject:output_type -> storage.WriteObjectResponse
+	12, // 20: storage.Storage.DeleteObject:output_type -> storage.DeleteObjectResponse
+	4,  // 21: storage.Storage.StatObject:output_type -> storage.StatObjectResponse
+	7,  // 22: storage.Storage.EditObjectMetadata:output_type -> storage.EditObjectMetadataResponse
+	18, // [18:23] is the sub-list for method output_type
+	13, // [13:18] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_storage_storage_proto_init() }
@@ -1198,7 +1216,7 @@ func file_storage_storage_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_storage_storage_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
