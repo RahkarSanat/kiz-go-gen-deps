@@ -4,7 +4,6 @@ go 1.21.1
 
 require (
 	github.com/RahkarSanat/protoc-gen-gorm v1.1.4
-	github.com/infobloxopen/protoc-gen-gorm v1.1.2
 	go.mongodb.org/mongo-driver v1.15.0
 	google.golang.org/genproto v0.0.0-20231211222908-989df2bf70f3
 	google.golang.org/genproto/googleapis/api v0.0.0-20231212172506-995d672761c0
