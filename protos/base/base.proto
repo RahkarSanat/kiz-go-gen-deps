@@ -159,7 +159,7 @@ message BaseProperties {
   optional string deleted_in = 3 [(base.mongoType).mongoType = "ObjectID"];
   optional string restored_in = 4 [(base.mongoType).mongoType = "ObjectID"];
   repeated string tags = 5;
-  optional string version = 6;
+  optional int32 version = 6;
 }
 
 message BaseDates {
@@ -217,7 +217,7 @@ message BasePropertiesRead {
   optional string deleted_in = 3 [(base.mongoType).mongoType = "ObjectID"];
   optional string restored_in = 4 [(base.mongoType).mongoType = "ObjectID"];
   repeated string tags = 5;
-  optional string version = 6;
+  optional int32 version = 6;
 }
 
 message BaseDatesRead {

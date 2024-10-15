@@ -1076,7 +1076,7 @@ type BaseProperties struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 }
 
 type BaseDates struct {
@@ -1262,7 +1262,7 @@ type BaseDates struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 
 	// NOT MESSAGE
 	Id string ``
@@ -1463,7 +1463,7 @@ type BaseAccessUpdate struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 
 	// NOT MESSAGE
 	Id string ``
@@ -1676,7 +1676,7 @@ type BasePropertiesUpdate struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 
 	// NOT MESSAGE
 	Id string ``
@@ -1892,7 +1892,7 @@ type BaseDatesUpdate struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 
 	// NOT MESSAGE
 	Id string ``
@@ -2108,7 +2108,7 @@ type BaseAccessRead struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 
 	// NOT MESSAGE
 	Id string ``
@@ -2351,7 +2351,7 @@ type BasePropertiesRead struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 
 	// NOT MESSAGE
 	Id string ``
@@ -2426,7 +2426,7 @@ type BasePropertiesRead struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 }
 
 type BaseDatesRead struct {
@@ -2612,7 +2612,7 @@ type BaseDatesRead struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 
 	// NOT MESSAGE
 	Id string ``
@@ -2687,7 +2687,7 @@ type BaseDatesRead struct {
 	Tags []string ``
 
 	// NOT MESSAGE
-	Version string ``
+	Version int32 ``
 
 	// NOT MESSAGE
 	CreatedAt string ``

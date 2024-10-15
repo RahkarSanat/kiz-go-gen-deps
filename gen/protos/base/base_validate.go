@@ -116,7 +116,7 @@ type BasePropertiesMongo struct {
 	DeletedIn  *primitive.ObjectID `bson:"deleted_in,omitempty" json:"deleted_in,omitempty"`
 	RestoredIn *primitive.ObjectID `bson:"restored_in,omitempty" json:"restored_in,omitempty"`
 	Tags       []string            `bson:"tags,omitempty" json:"tags,omitempty"`
-	Version    *string             `bson:"version,omitempty" json:"version,omitempty"`
+	Version    *int32              `bson:"version,omitempty" json:"version,omitempty"`
 }
 type BaseDatesMongo struct {
 	Id         *string             `bson:"id,omitempty" json:"id,omitempty"`
@@ -153,7 +153,7 @@ type BasePropertiesReadMongo struct {
 	DeletedIn  *primitive.ObjectID `bson:"deleted_in,omitempty" json:"deleted_in,omitempty"`
 	RestoredIn *primitive.ObjectID `bson:"restored_in,omitempty" json:"restored_in,omitempty"`
 	Tags       []string            `bson:"tags,omitempty" json:"tags,omitempty"`
-	Version    *string             `bson:"version,omitempty" json:"version,omitempty"`
+	Version    *int32              `bson:"version,omitempty" json:"version,omitempty"`
 }
 type BaseDatesReadMongo struct {
 	CreatedAt  *primitive.DateTime `bson:"created_at,omitempty" json:"created_at,omitempty"`
