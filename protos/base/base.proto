@@ -30,6 +30,10 @@ message ArchiveFindOneRequest {
 }
 
 message ArchiveFindOneResponse {
+  option (gorm.opts) = {
+    ormable: true
+    // table: "abrso.gps_v2_evt_table"
+  };
   string id = 1;
   optional string owner = 2;
   repeated string clients = 3 [(gorm.field).tag = {not_null: true}];
