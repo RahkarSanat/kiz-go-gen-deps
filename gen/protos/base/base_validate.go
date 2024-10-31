@@ -27,6 +27,23 @@ type CountRequestMongo struct {
 type FindRequestMongo struct {
 	Filter *FilterMongo `bson:"filter,omitempty" json:"filter,omitempty"`
 }
+type ArchiveFindOneRequestMongo struct {
+	Id      *string `bson:"id,omitempty" json:"id,omitempty"`
+	Version *string `bson:"version,omitempty" json:"version,omitempty"`
+}
+type ArchiveFindOneResponseMongo struct {
+	Id        *string  `bson:"id,omitempty" json:"id,omitempty"`
+	Owner     *string  `bson:"owner,omitempty" json:"owner,omitempty"`
+	Clients   []string `bson:"clients,omitempty" json:"clients,omitempty"`
+	Zones     []string `bson:"zones,omitempty" json:"zones,omitempty"`
+	Relations []string `bson:"relations,omitempty" json:"relations,omitempty"`
+	Shares    []string `bson:"shares,omitempty" json:"shares,omitempty"`
+	CreatedBy *string  `bson:"created_by,omitempty" json:"created_by,omitempty"`
+	CreatedAt *uint64  `bson:"created_at,omitempty" json:"created_at,omitempty"`
+	CreatedIn *string  `bson:"created_in,omitempty" json:"created_in,omitempty"`
+	Version   *string  `bson:"version,omitempty" json:"version,omitempty"`
+	Data      *[]byte  `bson:"data,omitempty" json:"data,omitempty"`
+}
 type FindByIDRequestMongo struct {
 	Id     string       `bson:"id" json:"id"`
 	Filter *FilterMongo `bson:"filter,omitempty" json:"filter,omitempty"`
@@ -217,6 +234,16 @@ func (m *CountRequest) Validate() error {
 }
 
 func (m *FindRequest) Validate() error {
+
+	return nil
+}
+
+func (m *ArchiveFindOneRequest) Validate() error {
+
+	return nil
+}
+
+func (m *ArchiveFindOneResponse) Validate() error {
 
 	return nil
 }

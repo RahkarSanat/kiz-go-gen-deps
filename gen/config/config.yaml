@@ -1,0 +1,34 @@
+Port: __ENV__PORT
+Path: "kiz"
+Base: "github.com/RahkarSanat/kiz-go-gen-deps/gen"
+AuthenticationURL: __ENV__AUTHENTICATION_URL
+AuthorizationURL: __ENV__AUTHORIZATION_URL
+health_port: __ENV__HEALTH_PORT
+
+ClickhouseDB:
+  ConString: __ENV__CLICKHOUSE_CON_STRING
+
+kafka:
+  host: __ENV__KAFKA_HOST
+  gateway_prefix: __ENV__KAFKA_GATEWAY_PREFIX 
+  group_id: __ENV__KAFKA_GROUP_ID 
+  num_partitions: __ENV__KAFKA_NUM_PARTITIONS
+  replication_factor: __ENV__KAFKA_REPLICATION_FACTOR
+  retention_ms: __ENV__RETENTION_MS
+  schema_registry: __ENV__SCHEMA_REGISTRY
+
+Minio:
+  Prefix: __ENV__MINIO_PREFIX
+  Remote:
+    Host: __ENV__MINIO_REMOTE_HOST
+    AccessKey: __ENV__MINIO_REMOTE_ACCESSKEY
+    SecretKey: __ENV__MINIO_REMOTE_SECRET
+    Token: ""
+  GRPCPort: __ENV__MINIO_GRPCPORT
+  HTTPPort: __ENV__MINIO_HTTPPORT
+
+
+DB:
+  Name: __ENV__DB_PORT
+  DBName: __ENV__DB_NAME
+  ConString: __ENV__DB_CONSTRING

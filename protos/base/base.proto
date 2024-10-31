@@ -24,6 +24,26 @@ message FindRequest {
   optional Filter filter = 1;
 }
 
+message ArchiveFindOneRequest {
+  string id = 1;
+  string version = 2;
+}
+
+message ArchiveFindOneResponse {
+  string id = 1;
+  optional string owner = 2;
+  repeated string clients = 3 [(gorm.field).tag = {not_null: true}];
+  repeated string zones = 4 [(gorm.field).tag = {not_null: true}];
+  repeated string relations = 5 [(gorm.field).tag = {not_null: true}];
+  repeated string shares = 6 [(gorm.field).tag = {not_null: true}];
+  optional string created_by = 7;
+  optional uint64 created_at = 8;
+  optional string created_in = 9;
+  optional string version = 10;
+  bytes data =20 [(gorm.field).tag = {not_null: true}];;
+}
+
+
 message FindByIDRequest {
   string id = 1 [(google.api.field_behavior) = REQUIRED];
   optional Filter filter = 2;
