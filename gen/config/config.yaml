@@ -7,6 +7,7 @@ health_port: __ENV__HEALTH_PORT
 
 ClickhouseDB:
   ConString: __ENV__CLICKHOUSE_CON_STRING
+  KafkaGroupId: __ENV__CLICKHOUSE_KAFKA_GROUP_ID
 
 kafka:
   host: __ENV__KAFKA_HOST

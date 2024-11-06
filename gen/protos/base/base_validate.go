@@ -27,11 +27,12 @@ type CountRequestMongo struct {
 type FindRequestMongo struct {
 	Filter *FilterMongo `bson:"filter,omitempty" json:"filter,omitempty"`
 }
-type ArchiveFindOneRequestMongo struct {
-	Id      *string `bson:"id,omitempty" json:"id,omitempty"`
-	Version *string `bson:"version,omitempty" json:"version,omitempty"`
+type FindByIdArchiveRequestMongo struct {
+	Id      string       `bson:"id" json:"id"`
+	Version *string      `bson:"version,omitempty" json:"version,omitempty"`
+	Filter  *FilterMongo `bson:"filter,omitempty" json:"filter,omitempty"`
 }
-type ArchiveFindOneResponseMongo struct {
+type FindByIdArchiveResponseMongo struct {
 	Id        *string  `bson:"id,omitempty" json:"id,omitempty"`
 	Owner     *string  `bson:"owner,omitempty" json:"owner,omitempty"`
 	Clients   []string `bson:"clients,omitempty" json:"clients,omitempty"`
@@ -238,12 +239,17 @@ func (m *FindRequest) Validate() error {
 	return nil
 }
 
-func (m *ArchiveFindOneRequest) Validate() error {
+func (m *FindByIdArchiveRequest) Validate() error {
+
+	if m.Id == "" {
+		err := status.Error(codes.InvalidArgument, "Id is required")
+		return err
+	}
 
 	return nil
 }
 
-func (m *ArchiveFindOneResponse) Validate() error {
+func (m *FindByIdArchiveResponse) Validate() error {
 
 	return nil
 }

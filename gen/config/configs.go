@@ -32,7 +32,8 @@ type DB struct {
 }
 
 type ClickhouseDB struct {
-	ConString string `yaml:"ConString"`
+	ConString    string `yaml:"ConString"`
+	KafkaGroupId string `yaml:"KafkaGroupId"`
 }
 
 type kafka struct {
