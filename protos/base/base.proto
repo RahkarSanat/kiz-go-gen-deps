@@ -24,12 +24,13 @@ message FindRequest {
   optional Filter filter = 1;
 }
 
-message ArchiveFindOneRequest {
-  string id = 1;
+message FindByIdArchiveRequest {
+  string id = 1 [(google.api.field_behavior) = REQUIRED];
   string version = 2;
+  optional Filter filter = 3;
 }
 
-message ArchiveFindOneResponse {
+message FindByIdArchiveResponse {
   option (gorm.opts) = {
     ormable: true
     // table: "abrso.gps_v2_evt_table"
