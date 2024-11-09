@@ -28,6 +28,7 @@ message FindByIdArchiveRequest {
   string id = 1 [(google.api.field_behavior) = REQUIRED];
   string version = 2;
   optional Filter filter = 3;
+  repeated Query queries = 4;
 }
 
 message FindByIdArchiveResponse {
@@ -112,6 +113,15 @@ message Pagination {
   optional int64 skip = 2;
   repeated Sort sort = 3;
 }
+
+message Query {
+  option (gorm.opts) = {ormable: false};
+  string Key = 1;
+  string Value = 2;
+  string Op = 3;
+  string Func = 4;
+}
+
 
 message Filter {
   optional Pagination pagination = 1;

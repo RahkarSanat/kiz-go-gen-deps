@@ -31,6 +31,7 @@ type FindByIdArchiveRequestMongo struct {
 	Id      string       `bson:"id" json:"id"`
 	Version *string      `bson:"version,omitempty" json:"version,omitempty"`
 	Filter  *FilterMongo `bson:"filter,omitempty" json:"filter,omitempty"`
+	Queries []QueryMongo `bson:"queries,omitempty" json:"queries,omitempty"`
 }
 type FindByIdArchiveResponseMongo struct {
 	Id        *string  `bson:"id,omitempty" json:"id,omitempty"`
@@ -84,6 +85,12 @@ type PaginationMongo struct {
 	Limit *int32      `bson:"limit,omitempty" json:"limit,omitempty"`
 	Skip  *int64      `bson:"skip,omitempty" json:"skip,omitempty"`
 	Sort  []SortMongo `bson:"sort,omitempty" json:"sort,omitempty"`
+}
+type QueryMongo struct {
+	Key   *string `bson:"key,omitempty" json:"key,omitempty"`
+	Value *string `bson:"value,omitempty" json:"value,omitempty"`
+	Op    *string `bson:"op,omitempty" json:"op,omitempty"`
+	Func  *string `bson:"func,omitempty" json:"func,omitempty"`
 }
 type FilterMongo struct {
 	Pagination      *PaginationMongo `bson:"pagination,omitempty" json:"pagination,omitempty"`
@@ -305,6 +312,11 @@ func (m *Sort) Validate() error {
 }
 
 func (m *Pagination) Validate() error {
+
+	return nil
+}
+
+func (m *Query) Validate() error {
 
 	return nil
 }
