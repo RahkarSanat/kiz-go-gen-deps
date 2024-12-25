@@ -26,7 +26,7 @@ message FindRequest {
 
 message FindByIdArchiveRequest {
   string id = 1 [(google.api.field_behavior) = REQUIRED];
-  string version = 2;
+  int32 version = 2;
   optional Filter filter = 3;
   repeated Query queries = 4;
 }
@@ -45,7 +45,7 @@ message FindByIdArchiveResponse {
   optional string created_by = 7;
   optional uint64 created_at = 8;
   optional string created_in = 9;
-  optional string version = 10;
+  optional int32 version = 10;
   bytes data =20 [(gorm.field).tag = {not_null: true}];;
 }
 

@@ -18,7 +18,7 @@ type FindByIdArchiveResponseORM struct {
 	Owner     *string
 	Relations []*string `gorm:"type:Array(String)"`
 	Shares    []*string `gorm:"type:Array(String)"`
-	Version   *string
+	Version   *int32
 	Zones     []*string `gorm:"type:Array(String)"`
 }
 

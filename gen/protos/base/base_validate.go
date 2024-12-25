@@ -29,7 +29,7 @@ type FindRequestMongo struct {
 }
 type FindByIdArchiveRequestMongo struct {
 	Id      string       `bson:"id" json:"id"`
-	Version *string      `bson:"version,omitempty" json:"version,omitempty"`
+	Version *int32       `bson:"version,omitempty" json:"version,omitempty"`
 	Filter  *FilterMongo `bson:"filter,omitempty" json:"filter,omitempty"`
 	Queries []QueryMongo `bson:"queries,omitempty" json:"queries,omitempty"`
 }
@@ -43,7 +43,7 @@ type FindByIdArchiveResponseMongo struct {
 	CreatedBy *string  `bson:"created_by,omitempty" json:"created_by,omitempty"`
 	CreatedAt *uint64  `bson:"created_at,omitempty" json:"created_at,omitempty"`
 	CreatedIn *string  `bson:"created_in,omitempty" json:"created_in,omitempty"`
-	Version   *string  `bson:"version,omitempty" json:"version,omitempty"`
+	Version   *int32   `bson:"version,omitempty" json:"version,omitempty"`
 	Data      *[]byte  `bson:"data,omitempty" json:"data,omitempty"`
 }
 type FindByIDRequestMongo struct {
