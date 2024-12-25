@@ -38,10 +38,10 @@ message FindByIdArchiveResponse {
   };
   string id = 1;
   optional string owner = 2;
-  repeated string clients = 3 [(gorm.field).tag = {not_null: true}];
-  repeated string zones = 4 [(gorm.field).tag = {not_null: true}];
-  repeated string relations = 5 [(gorm.field).tag = {not_null: true}];
-  repeated string shares = 6 [(gorm.field).tag = {not_null: true}];
+  repeated string clients = 3 ;
+  repeated string zones = 4 ;
+  repeated string relations = 5 ;
+  repeated string shares = 6 ;
   optional string created_by = 7;
   optional uint64 created_at = 8;
   optional string created_in = 9;

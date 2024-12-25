@@ -19,6 +19,8 @@ type Config struct {
 	HealthPort   string            `yaml:"health_port"`
 	Kafka        kafka             `yaml:"kafka"`
 	TrxTopics    map[string]string `yaml:"trx_topics"`
+	Redis        redis             `yaml:"redis"`
+	Cdc          cdc               `yaml:"cdc"`
 }
 type DB struct {
 	Name       string `yaml:"Name"`
@@ -44,6 +46,16 @@ type kafka struct {
 	ReplicationFactor string `yaml:"replication_factor"`
 	RetentionMs       string `yaml:"retention_ms"`
 	SchemaRegistry    string `yaml:"schema_registry"`
+}
+
+type redis struct {
+	Addr string `yaml:"Addr"`
+	Db   string `yaml:"Db"`
+	Pass string `yaml:"Pass"`
+}
+
+type cdc struct {
+	KafkaTopicPrefix string `yaml:"KafkaTopicPrefix"`
 }
 
 func substituteEnv(data interface{}) {

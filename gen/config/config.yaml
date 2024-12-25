@@ -17,6 +17,10 @@ kafka:
   replication_factor: __ENV__KAFKA_REPLICATION_FACTOR
   retention_ms: __ENV__RETENTION_MS
   schema_registry: __ENV__SCHEMA_REGISTRY
+redis:
+  Addr: __ENV__REDIS_ADDR
+  Db: __ENV__REDIS_DB
+  Pass: __ENV__REDIS_PASS
 
 Minio:
   Prefix: __ENV__MINIO_PREFIX
@@ -28,7 +32,8 @@ Minio:
   GRPCPort: __ENV__MINIO_GRPCPORT
   HTTPPort: __ENV__MINIO_HTTPPORT
 
-
+cdc:
+  KafkaTopicPrefix: __ENV__CDC_KAFKA_TOPIC_PREFIX
 DB:
   Name: __ENV__DB_PORT
   DBName: __ENV__DB_NAME
