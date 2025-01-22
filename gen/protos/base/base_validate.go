@@ -44,6 +44,10 @@ type FindByIdArchiveResponseMongo struct {
 	CreatedAt *uint64  `bson:"created_at,omitempty" json:"created_at,omitempty"`
 	CreatedIn *string  `bson:"created_in,omitempty" json:"created_in,omitempty"`
 	Version   *int32   `bson:"version,omitempty" json:"version,omitempty"`
+	UpdatedAt *uint64  `bson:"updated_at,omitempty" json:"updated_at,omitempty"`
+	UpdatedIn *string  `bson:"updated_in,omitempty" json:"updated_in,omitempty"`
+	UpdatedBy *string  `bson:"updated_by,omitempty" json:"updated_by,omitempty"`
+	Tags      []string `bson:"tags,omitempty" json:"tags,omitempty"`
 	Data      *[]byte  `bson:"data,omitempty" json:"data,omitempty"`
 }
 type FindByIDRequestMongo struct {

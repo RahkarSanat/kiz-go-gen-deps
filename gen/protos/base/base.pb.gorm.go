@@ -10,15 +10,19 @@ import (
 
 type FindByIdArchiveResponseORM struct {
 	Clients   []*string `gorm:"type:Array(String)"`
-	CreatedAt *uint64
+	CreatedAt *uint64   `gorm:"type:DateTime"`
 	CreatedBy *string
 	CreatedIn *string
 	Data      []byte `gorm:"type:bytea;not null"`
 	Id        string
-	Owner     *string
+	Owner     string    `gorm:"not null"`
 	Relations []*string `gorm:"type:Array(String)"`
 	Shares    []*string `gorm:"type:Array(String)"`
-	Version   *int32
+	Tags      []*string `gorm:"type:Array(String)"`
+	UpdatedAt *uint64   `gorm:"type:DateTime"`
+	UpdatedBy *string
+	UpdatedIn *string
+	Version   int32     `gorm:"not null"`
 	Zones     []*string `gorm:"type:Array(String)"`
 }
 
@@ -63,6 +67,14 @@ func (m *FindByIdArchiveResponse) ToORM(ctx context.Context) (FindByIdArchiveRes
 	to.CreatedAt = m.CreatedAt
 	to.CreatedIn = m.CreatedIn
 	to.Version = m.Version
+	to.UpdatedAt = m.UpdatedAt
+	to.UpdatedIn = m.UpdatedIn
+	to.UpdatedBy = m.UpdatedBy
+	if m.Tags != nil {
+		for _, v := range m.Tags {
+			to.Tags = append(to.Tags, &v)
+		}
+	}
 	to.Data = m.Data
 	if posthook, ok := interface{}(m).(FindByIdArchiveResponseWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
@@ -114,6 +126,16 @@ func (m *FindByIdArchiveResponseORM) ToPB(ctx context.Context) (FindByIdArchiveR
 	to.CreatedAt = m.CreatedAt
 	to.CreatedIn = m.CreatedIn
 	to.Version = m.Version
+	to.UpdatedAt = m.UpdatedAt
+	to.UpdatedIn = m.UpdatedIn
+	to.UpdatedBy = m.UpdatedBy
+	if m.Tags != nil {
+		for _, v := range m.Tags {
+			if v != nil {
+				to.Tags = append(to.Tags, *v)
+			}
+		}
+	}
 	to.Data = m.Data
 	if posthook, ok := interface{}(m).(FindByIdArchiveResponseWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
@@ -764,6 +786,22 @@ func DefaultApplyFieldMaskFindByIdArchiveResponse(ctx context.Context, patchee *
 		}
 		if f == prefix+"Version" {
 			patchee.Version = patcher.Version
+			continue
+		}
+		if f == prefix+"UpdatedAt" {
+			patchee.UpdatedAt = patcher.UpdatedAt
+			continue
+		}
+		if f == prefix+"UpdatedIn" {
+			patchee.UpdatedIn = patcher.UpdatedIn
+			continue
+		}
+		if f == prefix+"UpdatedBy" {
+			patchee.UpdatedBy = patcher.UpdatedBy
+			continue
+		}
+		if f == prefix+"Tags" {
+			patchee.Tags = patcher.Tags
 			continue
 		}
 		if f == prefix+"Data" {
