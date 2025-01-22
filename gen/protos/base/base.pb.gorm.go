@@ -10,7 +10,7 @@ import (
 
 type FindByIdArchiveResponseORM struct {
 	Clients   []string `gorm:"type:Array(String);not null"`
-	CreatedAt *uint64  `gorm:"type:DateTime"`
+	CreatedAt *string  `gorm:"type:DateTime"`
 	CreatedBy *string
 	CreatedIn *string
 	Data      []byte `gorm:"type:bytea;not null"`
@@ -19,7 +19,7 @@ type FindByIdArchiveResponseORM struct {
 	Relations []string `gorm:"type:Array(String);not null"`
 	Shares    []string `gorm:"type:Array(String);not null"`
 	Tags      []string `gorm:"type:Array(String);not null"`
-	UpdatedAt *uint64  `gorm:"type:DateTime"`
+	UpdatedAt *string  `gorm:"type:DateTime"`
 	UpdatedBy *string
 	UpdatedIn *string
 	Version   int32    `gorm:"not null"`

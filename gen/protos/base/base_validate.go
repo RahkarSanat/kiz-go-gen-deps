@@ -41,10 +41,10 @@ type FindByIdArchiveResponseMongo struct {
 	Relations []string `bson:"relations,omitempty" json:"relations,omitempty"`
 	Shares    []string `bson:"shares,omitempty" json:"shares,omitempty"`
 	CreatedBy *string  `bson:"created_by,omitempty" json:"created_by,omitempty"`
-	CreatedAt *uint64  `bson:"created_at,omitempty" json:"created_at,omitempty"`
+	CreatedAt *string  `bson:"created_at,omitempty" json:"created_at,omitempty"`
 	CreatedIn *string  `bson:"created_in,omitempty" json:"created_in,omitempty"`
 	Version   *int32   `bson:"version,omitempty" json:"version,omitempty"`
-	UpdatedAt *uint64  `bson:"updated_at,omitempty" json:"updated_at,omitempty"`
+	UpdatedAt *string  `bson:"updated_at,omitempty" json:"updated_at,omitempty"`
 	UpdatedIn *string  `bson:"updated_in,omitempty" json:"updated_in,omitempty"`
 	UpdatedBy *string  `bson:"updated_by,omitempty" json:"updated_by,omitempty"`
 	Tags      []string `bson:"tags,omitempty" json:"tags,omitempty"`
